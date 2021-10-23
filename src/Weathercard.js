@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import {WiSunset} from 'react-icons/wi';
-import {TiWeatherCloudy} from 'react-icons/ti';
  
 export const Weathercard = ( {tempInfo} ) => {
     const [weatherState, setWeatherState] = useState('');

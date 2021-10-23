@@ -6,19 +6,23 @@ import axios from 'axios'
 const Temp = () => {
 
     const [users, setUsers] = useState([]);
-    const [inputName, setInputName] = useState("");
+  
 
-    useEffect(async() => {
+    useEffect(() => {
+        getData();
+    }, [])
+
+    const getData = async () => {
         try {
             let res = await axios.get('http://localhost:8000/getusers')
             setUsers(res.data);
         } catch (error) {
             console.log(error);
         }
-    }, [])
+    }
 
-    const [searchValue, setSearchValue] = useState("Limbdi");
-    const [tempInfo, setTempInfo] = useState ({});
+    const [searchValue, setSearchValue] = useState("");
+    const [tempInfo, setTempInfo] = useState(null);
 
     const getWeatherInfo = async () => {
         try {
@@ -26,7 +30,7 @@ const Temp = () => {
 
             const res = await fetch(url);
             const data = await res.json();
-        
+
             const { temp, humidity, pressure } = data.main;
             const { main: weathermoosd } = data.weather[0];
             const { name } = data;
@@ -50,20 +54,20 @@ const Temp = () => {
         }
     };
 
-    useEffect(() =>{
-        getWeatherInfo();
-    },[]);
+    // useEffect(() => {
+    //     getWeatherInfo();
+    // }, []);
 
-    const submitForm = async() => {
-        try {
-            let data = {
-                name: inputName,
-            }
-            let res = await axios.post('http://localhost:3000/register', data);
-        } catch (error) {
-            
-        }
-    }
+    // const submitForm = async() => {
+    //     try {
+    //         let data = {
+    //             name: inputName,
+    //         }
+    //         let res = await axios.post('http://localhost:3000/register', data);
+    //     } catch (error) {
+
+    //     }
+    // }
 
     return (
         <>
@@ -87,7 +91,7 @@ const Temp = () => {
                     </button>
                 </div>
             </div>
-            <Weathercard tempInfo={tempInfo} />
+            {tempInfo && <Weathercard tempInfo={tempInfo} />}
             <br />
             <br />
             <br />
