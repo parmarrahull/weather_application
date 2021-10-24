@@ -6,7 +6,6 @@ import axios from 'axios'
 const Temp = () => {
 
     const [users, setUsers] = useState([]);
-  
 
     useEffect(() => {
         getData();
@@ -75,7 +74,7 @@ const Temp = () => {
                 <div className='search'>
                     <input
                         type='search'
-                        placeholder='search...'
+                        placeholder='Search City Name'
                         autoFocus
                         id='search'
                         className='searchTerm'
